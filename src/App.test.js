@@ -1,7 +1,7 @@
 import React from "react";
-import { render, fireEvent, waitFor, act} from "@testing-library/react";
+import { render, userEvent, waitFor, act, click} from "@testing-library/react";
 import App from "./App";
-import { fetchShow as mockFetchShow } from "./";
+import { fetchShow as mockFetchShow } from "./api/fetchShow";
 
 jest.mock("./api/fetchShow");
 
@@ -605,9 +605,24 @@ const showData = {
     }
   }
 };
+
 test ('App rendered', async () => {
-    mockFetchShow.mockResolvedValueOnce(showData);
-    await act(async () => {
-        return render(<App />)
-    });
+  mockFetchShow.mockResolvedValueOnce(showData);
+  await act(async () => {
+      return render(<App />)
+  });
 }); 
+// test ('App rendered', async () => {
+//     mockFetchShow.mockResolvedValueOnce(showData);
+//       const {getByText, getAllByText, debug} = render(<App />);
+//       await waitFor(() => {
+        
+
+//         expect(mockFetchShow).toHaveBeenCalledTimes(1);
+//         getByText(/select a season/i)
+//         debug();
+//       })
+//       const dropdown = getByText(/select a season/i)
+//       userEvent.click(dropdown)
+//   }); 
+    
